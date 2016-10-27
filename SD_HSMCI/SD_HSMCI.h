@@ -70,14 +70,14 @@
 /* ------------------------------------------------------------------------ */
 /*! Number of slot connected on HSMCI interface */
 #define SD_MMC_HSMCI_MEM_CNT        1
-#define SD_MMC_HSMCI_SLOT_0_SIZE    4
+#define SD_MMC_HSMCI_SLOT_0_SIZE    1
 #define PINS_HSMCI\
 	{ PIO_PA20A_MCCDA | PIO_PA19A_MCCK | PIO_PA21A_MCDA0 | PIO_PA22A_MCDA1\
 	| PIO_PA23A_MCDA2 | PIO_PA24A_MCDA3,\
 	PIOA, ID_PIOA, PIO_PERIPH_A, PIO_PULLUP }
 
-#define PIN_HSMCI_CD {PIO_PA28, PIOA, ID_PIOA, PIO_INPUT, PIO_PULLUP}
-#define SD_MMC_0_CD_GPIO            77//(PIO_PB27_IDX) //Arduino digital pin 77
+#define PIN_HSMCI_CD {PIO_PC30, PIOC, ID_PIOC, PIO_INPUT, PIO_PULLUP}
+#define SD_MMC_0_CD_GPIO            72//(PIO_PB27_IDX) //Arduino digital pin 72
 #define SD_MMC_0_CD_GPIO_INSTRUMENT 13//(PIO_PB27_IDX) //Arduino digital pin 13
 #define SD_MMC_0_CD_PIO_ID          ID_PIOA
 #define SD_MMC_0_CD_FLAGS           (PIO_INPUT | PIO_PULLUP)

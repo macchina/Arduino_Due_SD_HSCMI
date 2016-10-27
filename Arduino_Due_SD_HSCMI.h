@@ -172,6 +172,7 @@ public:
 	FileStore(void);//FileStore(Platform* p);
 	void Init();
 	bool Open(const char* directory, const char* fileName, bool write);
+	bool CreateNew(const char* directory, const char* fileName);
 
 private:
 	byte buf[FILE_BUF_LEN];
@@ -302,7 +303,7 @@ static const uint8_t PIN_HSMCI_MCDA1_GPIO  = 104;
 static const uint8_t PIN_HSMCI_MCDA2_GPIO  = 105;
 static const uint8_t PIN_HSMCI_MCDA3_GPIO  = 106;
 
-static const uint8_t PIN_HSMCI_CARD_DETECT_ARDUINO = 77;
+static const uint8_t PIN_HSMCI_CARD_DETECT_ARDUINO = 72;
 static const uint8_t PIN_HSMCI_MCCDA_GPIO_ARDUINO  = 43;
 static const uint8_t PIN_HSMCI_MCCK_GPIO_ARDUINO  = 42;
 static const uint8_t PIN_HSMCI_MCDA0_GPIO_ARDUINO  = 73;

@@ -1,45 +1,36 @@
-SD HSCMI for the Arduino Due
-==============
-Firmware for Arduino Due SD HSCMI Card.
-Pin wiring set for the PowerDué.
-Reference for PowerDué lab for Low Power System on Chip Spring 2016 at CMU-SV.
+## SD HSCMI for Macchina M2
+Libraries and Examples for Macchina M2 HSCMI (High Speed MultiMedia Card Interface). Provides faster read/write to SD cards while freeing up SPI interface.
 
-Install
-==============
+#### Install
+
 1. Download the files
 2. Move the folder `Arduino_Due_SD_HSCMI` to your Arduino Libraries
 3. Move the folder `SD_HSMCI` to your Arduino Libraries (Same level as `Arduino_Due_SD_HSCMI`)
 
-Storage manipulation
-==============
+#### Storage manipulation
+
 * The `SD` object will be created on `#include <Arduino_Due_SD_HSCMI.h>`
 * Use `SD.MakeDirectory` to create a directory
 
-Creating a file
-==============
+#### Creating a file
+
 * Create a new FileStore with `FileStore * f = new FileStore()`
 * Initiate the File pointer with `f->Init()`
 * Open the File Structure with `f->Open([DIRECTORY], [FILENAME], [FILE_WRITE | FILE_READ])`
-* Write with `f->Write([BUFFER], [LENGHT]);`
+* Write with `f->Write([BUFFER], [LENGTH]);`
 * Close `f->Close()`
 
-Arduino Wiring
-==============
-### Arduino_Due_SD_HSCMI.h
-Change following values to match the wiring of your board.
-```
-static const uint8_t PIN_HSMCI_MCCDA_GPIO  = 101;
-static const uint8_t PIN_HSMCI_MCCK_GPIO  = 102;
-static const uint8_t PIN_HSMCI_MCDA0_GPIO  = 103;
-static const uint8_t PIN_HSMCI_MCDA1_GPIO  = 104;
-static const uint8_t PIN_HSMCI_MCDA2_GPIO  = 105;
-static const uint8_t PIN_HSMCI_MCDA3_GPIO  = 106;
+#### EXAMPLES
 
-static const uint8_t PIN_HSMCI_CARD_DETECT_ARDUINO = 77;
-static const uint8_t PIN_HSMCI_MCCDA_GPIO_ARDUINO  = 43;
-static const uint8_t PIN_HSMCI_MCCK_GPIO_ARDUINO  = 42;
-static const uint8_t PIN_HSMCI_MCDA0_GPIO_ARDUINO  = 73;
-static const uint8_t PIN_HSMCI_MCDA1_GPIO_ARDUINO  = 57;
-static const uint8_t PIN_HSMCI_MCDA2_GPIO_ARDUINO  = 56;
-static const uint8_t PIN_HSMCI_MCDA3_GPIO_ARDUINO  = 55;
-```
+There are 6 example sketches included in Arduino_Due_HSCMI-master Library. List and description of examples in order of complexity:
+
+* `DirManipulation` creates new directory, rename directory and delete directory from SD card
+* `FileManipulation` creates new file, open/close file, rename file and delete file
+* `FileList` creates files and writes raw data to them, checks writing times and creates a list of files on SD card
+* `Datalogger_dif` creates new file, reads GPIO and log data to SD card
+* `Dumpdata_SerialtoSD` creates new file than reads from SerialUSBand writes to the file
+* `Dumpdata_SDtoSerial` creates new file with raw data than reads from file and print to SerialUSB
+
+#### DEBUG
+
+HSCMI library has the Debug option which can be enabled (DEFAULT) or disabled. To change that, please open `Arduino_Due_SD_HSCMI.h` and change constant `SD_DEBUG` to “true” (enabled) or false (disabled).

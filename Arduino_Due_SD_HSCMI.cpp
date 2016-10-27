@@ -505,11 +505,14 @@ bool MassStorage::FindNext(FileInfo &file_info)
 	if (f_readdir(findDir, &entry) != FR_OK || entry.fname[0] == 0)
 	{
 		//f_closedir(findDir);
+		Debug("no file found\n");
 		return false;
 	}
-
+	Debug("file found\n");
 	file_info.isDirectory = (entry.fattrib & AM_DIR);
+	Debug("Directory: ",file_info.isDirectory);
 	file_info.size = entry.fsize;
+	Debug("Size: ",file_info.size);
 	uint16_t day = entry.fdate & 0x1F;
 	if (day == 0)
 	{
@@ -517,13 +520,17 @@ bool MassStorage::FindNext(FileInfo &file_info)
 		day = 1;
 	}
 	file_info.day = day;
+	Debug("Day: ",file_info.day);
 	file_info.month = (entry.fdate & 0x01E0) >> 5;
+	Debug("Month: ",file_info.month);
 	file_info.year = (entry.fdate >> 9) + 1980;
+	Debug("Year: ",file_info.year);
 	if (file_info.fileName[0] == 0)
 	{
 		strncpy(file_info.fileName, entry.fname, ARRAY_SIZE(file_info.fileName));
 	}
-
+	Debug("File name: ",file_info.fileName);
+	
 	return true;
 }
 
@@ -549,6 +556,7 @@ bool MassStorage::Delete(const char* directory, const char* fileName)
     Debug("MS","\n");
 		return false;
 	}
+	Debug("MS","File and directory were deleted.\n");
 	return true;
 }
 
@@ -560,9 +568,12 @@ bool MassStorage::MakeDirectory(const char *parentDir, const char *dirName)
 	{
 		Debug("MS","Can't create directory ");
 		Debug("MS",location);
-    Debug("MS","\n");
+		Debug("\n");
 		return false;
 	}
+	Debug("MS","Directory ");
+	Debug(location);
+	Debug(" created.\n");
 	return true;
 }
 
@@ -572,9 +583,12 @@ bool MassStorage::MakeDirectory(const char *directory)
 	{
 		Debug("MS","Can't create directory ");
 		Debug("MS",directory);
-    Debug("MS","\n");
+		Debug("\n");
 		return false;
 	}
+	Debug("MS","Directory ");
+	Debug(directory);
+	Debug(" created.\n");
 	return true;
 }
 
@@ -585,11 +599,15 @@ bool MassStorage::Rename(const char *oldFilename, const char *newFilename)
 	{
 		Debug("MS","Can't rename file or directory ");
 		Debug("MS",oldFilename);
-		Debug("MS"," to ");
+		Debug(" to ");
 		Debug("MS",newFilename);
     Debug("MS","\n");
 		return false;
 	}
+	Debug("MS ", oldFilename);
+	Debug(" was renamed to ");
+	Debug(newFilename);
+	Debug("\n");
 	return true;
 }
 
@@ -598,7 +616,16 @@ bool MassStorage::FileExists(const char *file) const
 {
  	FILINFO fil;
  	fil.lfname = nullptr;
-	return (f_stat(file, &fil) == FR_OK);
+	if(f_stat(file, &fil) == FR_OK){
+		Debug("MS","File ");
+		Debug(file);
+		Debug(" already exists.\n");
+		return true;
+	}
+	Debug("MS","File ");
+	Debug(file);
+	Debug(" was not found.\n");
+	return false;
 }
 
 // Check if the specified directory exists
@@ -606,7 +633,16 @@ bool MassStorage::PathExists(const char *path) const
 {
  	DIR dir;
  	dir.lfn = nullptr;
-	return (f_opendir(&dir, path) == FR_OK);
+	if(f_opendir(&dir, path) == FR_OK){
+		Debug("MS","Path ");
+		Debug(path);
+		Debug(" already exists.\n");
+		return true;
+	}
+	Debug("MS","Path ");
+	Debug(path);
+	Debug(" was not found.\n");
+	return false;
 }
 
 bool MassStorage::PathExists(const char* directory, const char* subDirectory)
@@ -643,24 +679,56 @@ bool FileStore::Open(const char* directory, const char* fileName, bool write)
 	lastBufferEntry = FILE_BUF_LEN - 1;
 	bytesRead = 0;
 
-	FRESULT openReturn = f_open(&file, location, (writing) ? FA_CREATE_ALWAYS | FA_WRITE : FA_OPEN_EXISTING | FA_READ);
+//	FRESULT openReturn = f_open(&file, location, (writing) ? FA_CREATE_ALWAYS | FA_WRITE : FA_OPEN_EXISTING | FA_READ);
+    FRESULT openReturn = f_open(&file, location, (writing) ?  FA_OPEN_ALWAYS | FA_WRITE : FA_OPEN_EXISTING | FA_READ);
 	if (openReturn != FR_OK)
 	{
 		Debug("FS","Can't open ");
-		Debug("FS",location);
-		Debug("FS"," to ");
-		Debug("FS",(writing) ? "write" : "read");
-		Debug("FS",", error code ");
-		Debug("FS",openReturn);
-    Debug("FS","\n");
+		Debug(location);
+		Debug(" to ");
+		Debug((writing) ? "write" : "read");
+		Debug(", error code ");
+		Debug(openReturn);
+		Debug("\n");
 		return false;
 	}
 
 	bufferPointer = (writing) ? 0 : FILE_BUF_LEN;
 	inUse = true;
 	openCount = 1;
+	Debug("FS","File opened.\n");
 	return true;
 }
+
+bool FileStore::CreateNew(const char* directory, const char* fileName)
+{
+	const char* location = (directory != NULL)
+							? SD.CombineName(directory, fileName)
+								: fileName;
+	writing = true;
+	lastBufferEntry = FILE_BUF_LEN - 1;
+	bytesRead = 0;
+
+	FRESULT openReturn = f_open(&file, location, (writing) ? FA_CREATE_ALWAYS | FA_WRITE : FA_OPEN_EXISTING | FA_READ);
+	if (openReturn != FR_OK)
+	{
+		Debug("FS","Can't open ");
+		Debug(location);
+		Debug(" to ");
+		Debug((writing) ? "write" : "read");
+		Debug(", error code ");
+		Debug(openReturn);
+		Debug("\n");
+		return false;
+	}
+
+	bufferPointer = 0;
+	inUse = true;
+	openCount = 1;
+	Debug("FS","File created.\n");
+	return true;
+}
+
 
 void FileStore::Duplicate()
 {
@@ -682,6 +750,7 @@ bool FileStore::Close()
 	--openCount;
 	if (openCount != 0)
 	{
+		Debug("FS","File closed.\n");
 		return true;
 	}
 	bool ok = true;
@@ -693,6 +762,9 @@ bool FileStore::Close()
 	inUse = false;
 	writing = false;
 	lastBufferEntry = 0;
+	if(ok && fr == FR_OK){
+		Debug("FS","File closed.\n");
+	}
 	return ok && fr == FR_OK;
 }
 
