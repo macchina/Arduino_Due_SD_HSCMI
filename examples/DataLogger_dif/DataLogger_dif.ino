@@ -33,7 +33,7 @@
  */
 
 // Including Arduino_Due_SD_HSCMI library also creates SD object (MassStorage class)
-#include <Arduino_Due_SD_HSCMI.h> // This creates the object SD
+#include <Arduino_Due_SD_HSMCI.h> // This creates the object SD
 
 // Include SamNonDuePin.h library
 #include "Arduino.h"

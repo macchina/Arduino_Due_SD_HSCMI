@@ -45,7 +45,7 @@
  */
 
 // Including Arduino_Due_SD_HSCMI library also creates SD object (MassStorage class)
-#include <Arduino_Due_SD_HSCMI.h> // This creates the object SD
+#include <Arduino_Due_SD_HSMCI.h> // This creates the object SD
 
 // We need to create FileStore object, we will be using it to open/create file and to write to it and to close file.
 FileStore FS;
