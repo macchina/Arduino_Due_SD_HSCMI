@@ -1,4 +1,4 @@
-#include "Arduino_Due_SD_HSCMI.h"
+#include "Arduino_Due_SD_HSMCI.h"
 #include <SD_HSMCI.h>
 
 /*
