@@ -1,47 +1,17 @@
-/*  Copyright (c) 2016 Macchina
+/*  Dumpdata: SD to Serial - reading from SD and printing on SerialUSB (Arduino Due Native port)
  *
- *  Permission is hereby granted, free of charge, to any person obtaining
- *  a copy of this software and associated documentation files (the
- *  "Software"), to deal in the Software without restriction, including
- *  without limitation the rights to use, copy, modify, merge, publish,
- *  distribute, sublicense, and/or sell copies of the Software, and to
- *  permit persons to whom the Software is furnished to do so, subject to
- *  the following conditions:
+ *  Written in July 2016 by Blaž Pongrac B.S., RoboSap, Institute of Technology, Ptuj (www.robosap-institut.eu) for Macchina LLC
  *
- *  The above copyright notice and this permission notice shall be included
- *  in all copies or substantial portions of the Software.
+ *  To the extent possible under law, the author(s) have dedicated all copyright and related and neighboring rights to this software to the public domain worldwide. This software is distributed without any warranty.
  *
- *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- *  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
- *  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
- *  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
- *  CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
- *  TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
- *  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- *
- *  DataLogger: non-due-pins and data logger
+ *  You should have received a copy of the CC0 Public Domain Dedication along with this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>. 
  *  
- *  Using modified Arduino_Due_SD_HSCMI library from Github user JoaoDiogoFalcao (https://github.com/JoaoDiogoFalcao/Arduino_Due_SD_HSCMI)
- *  
- *  Author: Blaž Pongrac B.S., RoboSap, Institute of Technology, Ptuj (www.robosap-institut.eu)
+ *  Using modified Arduino_Due_SD_HSCMI library (https://github.com/macchina/Arduino_Due_SD_HSMCI) from Github user JoaoDiogoFalcao (https://github.com/JoaoDiogoFalcao/Arduino_Due_SD_HSCMI)
  *  
  *  CAUTION!
  *  To run this code, please compile and upload code to your board. When code is uploaded, please run Serial Terminal as quick as plausible.
  *  
- *  Arduino IDE 1.6.9
- *  RoboSap, Institute of Technology, July 2016
- *
- *  Dumpdata - SD to Serial: reading from SD and printing on SerialUSB (Arduino Due Native port)
- *  
- *  Using modified Arduino_Due_SD_HSCMI library from Github user JoaoDiogoFalcao (https://github.com/JoaoDiogoFalcao/Arduino_Due_SD_HSCMI)
- *  
- *  Author: Blaž Pongrac B.S., RoboSap, Institute of Technology, Ptuj (www.robosap-institut.eu)
- *  
- *  CAUTION!
- *  To run this code, please compile and upload code to your board. When code is uploaded, please run Serial Terminal as quick as plausible if you want to debug it.
- *  
- *  Arduino IDE 1.6.9
- *  RoboSap, Institute of Technology, July 2016
+ *  Developed against Arduino IDE 1.6.9
  */
 
 // Including Arduino_Due_SD_HSCMI library also creates SD object (MassStorage class)
