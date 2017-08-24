@@ -28,7 +28,7 @@ Licence: MIT
 // Platform-specific includes
 #include "Arduino.h"
 #include "Configuration.h"
-#include <SD_HSMCI.h>
+#include <SD_HSMCI/SD_HSMCI.h>
 
 /**************************************************************************************************/
 
