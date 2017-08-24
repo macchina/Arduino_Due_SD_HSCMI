@@ -1,5 +1,5 @@
 #include "Arduino_Due_SD_HSMCI.h"
-#include <SD_HSMCI.h>
+#include <SD_HSMCI/SD_HSMCI.h>
 
 /*
  * Debug Functions (Change output channel if needed)
