@@ -10,11 +10,17 @@ Version 0.0.1
 Joao Diogo Falcao
 Licence: MIT
 
+Modified Tony Doust 26/08/2017 for use with Macchina M2 Tony Doust
+
 ****************************************************************************************************/
 
 #ifndef PLATFORM_H
 #define PLATFORM_H
 
+// Macchina M2 #define to use Macchine M2 specific defines in Macchina M2 variant files
+#ifndef __MACCHINA_M2
+#define __MACCHINA_M2	// Use Macchine M2 specific variant file defines
+#endif
 
 #define SD_DEBUG true
 
@@ -176,7 +182,7 @@ public:
 
 private:
 	byte buf[FILE_BUF_LEN];
-	int bufferPointer;
+	unsigned int bufferPointer;
 	unsigned long bytesRead;
 
 	bool ReadBuffer();
@@ -296,20 +302,41 @@ private:
 
 //HSMCI
 
-static const uint8_t PIN_HSMCI_MCCDA_GPIO  = 101;
-static const uint8_t PIN_HSMCI_MCCK_GPIO  = 102;
-static const uint8_t PIN_HSMCI_MCDA0_GPIO  = 103;
-static const uint8_t PIN_HSMCI_MCDA1_GPIO  = 104;
-static const uint8_t PIN_HSMCI_MCDA2_GPIO  = 105;
-static const uint8_t PIN_HSMCI_MCDA3_GPIO  = 106;
+#ifdef __MACCHINA_M2
+
+static const uint8_t PIN_HSMCI_MCCDA_GPIO = 38;
+static const uint8_t PIN_HSMCI_MCCK_GPIO = 37;
+static const uint8_t PIN_HSMCI_MCDA0_GPIO = 39;
+static const uint8_t PIN_HSMCI_MCDA1_GPIO = 40;
+static const uint8_t PIN_HSMCI_MCDA2_GPIO = 41;
+static const uint8_t PIN_HSMCI_MCDA3_GPIO = 42;
+
+static const uint8_t PIN_HSMCI_CARD_DETECT_ARDUINO = 36;
+static const uint8_t PIN_HSMCI_MCCDA_GPIO_ARDUINO = 38;
+static const uint8_t PIN_HSMCI_MCCK_GPIO_ARDUINO = 37;
+static const uint8_t PIN_HSMCI_MCDA0_GPIO_ARDUINO = 39;
+static const uint8_t PIN_HSMCI_MCDA1_GPIO_ARDUINO = 40;
+static const uint8_t PIN_HSMCI_MCDA2_GPIO_ARDUINO = 41;
+static const uint8_t PIN_HSMCI_MCDA3_GPIO_ARDUINO = 42;
+
+#else
+
+static const uint8_t PIN_HSMCI_MCCDA_GPIO = 101;
+static const uint8_t PIN_HSMCI_MCCK_GPIO = 102;
+static const uint8_t PIN_HSMCI_MCDA0_GPIO = 103;
+static const uint8_t PIN_HSMCI_MCDA1_GPIO = 104;
+static const uint8_t PIN_HSMCI_MCDA2_GPIO = 105;
+static const uint8_t PIN_HSMCI_MCDA3_GPIO = 106;
 
 static const uint8_t PIN_HSMCI_CARD_DETECT_ARDUINO = 72;
-static const uint8_t PIN_HSMCI_MCCDA_GPIO_ARDUINO  = 43;
-static const uint8_t PIN_HSMCI_MCCK_GPIO_ARDUINO  = 42;
-static const uint8_t PIN_HSMCI_MCDA0_GPIO_ARDUINO  = 73;
-static const uint8_t PIN_HSMCI_MCDA1_GPIO_ARDUINO  = 57;
-static const uint8_t PIN_HSMCI_MCDA2_GPIO_ARDUINO  = 56;
-static const uint8_t PIN_HSMCI_MCDA3_GPIO_ARDUINO  = 55;
+static const uint8_t PIN_HSMCI_MCCDA_GPIO_ARDUINO = 43;
+static const uint8_t PIN_HSMCI_MCCK_GPIO_ARDUINO = 42;
+static const uint8_t PIN_HSMCI_MCDA0_GPIO_ARDUINO = 73;
+static const uint8_t PIN_HSMCI_MCDA1_GPIO_ARDUINO = 57;
+static const uint8_t PIN_HSMCI_MCDA2_GPIO_ARDUINO = 56;
+static const uint8_t PIN_HSMCI_MCDA3_GPIO_ARDUINO = 55;
+
+#endif
 
 
 extern MassStorage SD;

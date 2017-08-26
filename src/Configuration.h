@@ -11,6 +11,10 @@ http://reprappro.com
 Licence: GPL"
 
 To work with the PowerDue
+
+	Added 26/08/2017 Tony Doust
+		Macchina specific preprocessor #define __Macchina_M2 in Arduino_Due_SD_HSMCI.h
+		to use Macchine M2 pin mappings from Macchina M2 specific Variant files
 -----------------------------------------------------------------------------------------------------
 ****************************************************************************************************/
 

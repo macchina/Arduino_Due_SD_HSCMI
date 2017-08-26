@@ -33,6 +33,7 @@ void Debug(const char* msg){
 /*
  * Pins descriptions
  */
+#ifndef MACCHINA_M2
 extern const PinDescription g_APinDescription2[]=
 {
   // 0 .. 53 - Digital pins
@@ -242,7 +243,7 @@ extern const PinDescription g_APinDescription2[]=
   // END
   { NULL, 0, 0, PIO_NOT_A_PIN, PIO_DEFAULT, 0, NO_ADC, NO_ADC, NOT_ON_PWM, NOT_ON_TIMER }
 } ;
-
+#endif
 
 
 bool StringEquals(const char* s1, const char* s2)
@@ -277,12 +278,21 @@ void MassStorage::Init()
 	// Initialize SD MMC stack
 
   // Initialize HSMCI pins
-  PIO_Configure(g_APinDescription2[PIN_HSMCI_MCCDA_GPIO].pPort,g_APinDescription2[PIN_HSMCI_MCCDA_GPIO].ulPinType,g_APinDescription2[PIN_HSMCI_MCCDA_GPIO].ulPin,g_APinDescription2[PIN_HSMCI_MCCDA_GPIO].ulPinConfiguration);
-  PIO_Configure(g_APinDescription2[PIN_HSMCI_MCCK_GPIO].pPort,g_APinDescription2[PIN_HSMCI_MCCK_GPIO].ulPinType,g_APinDescription2[PIN_HSMCI_MCCK_GPIO].ulPin,g_APinDescription2[PIN_HSMCI_MCCK_GPIO].ulPinConfiguration);
-  PIO_Configure(g_APinDescription2[PIN_HSMCI_MCDA0_GPIO].pPort,g_APinDescription2[PIN_HSMCI_MCDA0_GPIO].ulPinType,g_APinDescription2[PIN_HSMCI_MCDA0_GPIO].ulPin,g_APinDescription2[PIN_HSMCI_MCDA0_GPIO].ulPinConfiguration);
-  PIO_Configure(g_APinDescription2[PIN_HSMCI_MCDA1_GPIO].pPort,g_APinDescription2[PIN_HSMCI_MCDA1_GPIO].ulPinType,g_APinDescription2[PIN_HSMCI_MCDA1_GPIO].ulPin,g_APinDescription2[PIN_HSMCI_MCDA1_GPIO].ulPinConfiguration);
-  PIO_Configure(g_APinDescription2[PIN_HSMCI_MCDA2_GPIO].pPort,g_APinDescription2[PIN_HSMCI_MCDA2_GPIO].ulPinType,g_APinDescription2[PIN_HSMCI_MCDA2_GPIO].ulPin,g_APinDescription2[PIN_HSMCI_MCDA2_GPIO].ulPinConfiguration);
-  PIO_Configure(g_APinDescription2[PIN_HSMCI_MCDA3_GPIO].pPort,g_APinDescription2[PIN_HSMCI_MCDA3_GPIO].ulPinType,g_APinDescription2[PIN_HSMCI_MCDA3_GPIO].ulPin,g_APinDescription2[PIN_HSMCI_MCDA3_GPIO].ulPinConfiguration);
+	#ifdef __MACCHINA_M2
+	PIO_Configure(g_APinDescription[PIN_HSMCI_MCCDA_GPIO].pPort, g_APinDescription[PIN_HSMCI_MCCDA_GPIO].ulPinType, g_APinDescription[PIN_HSMCI_MCCDA_GPIO].ulPin, g_APinDescription[PIN_HSMCI_MCCDA_GPIO].ulPinConfiguration);
+	PIO_Configure(g_APinDescription[PIN_HSMCI_MCCK_GPIO].pPort, g_APinDescription[PIN_HSMCI_MCCK_GPIO].ulPinType, g_APinDescription[PIN_HSMCI_MCCK_GPIO].ulPin, g_APinDescription[PIN_HSMCI_MCCK_GPIO].ulPinConfiguration);
+	PIO_Configure(g_APinDescription[PIN_HSMCI_MCDA0_GPIO].pPort, g_APinDescription[PIN_HSMCI_MCDA0_GPIO].ulPinType, g_APinDescription[PIN_HSMCI_MCDA0_GPIO].ulPin, g_APinDescription[PIN_HSMCI_MCDA0_GPIO].ulPinConfiguration);
+	PIO_Configure(g_APinDescription[PIN_HSMCI_MCDA1_GPIO].pPort, g_APinDescription[PIN_HSMCI_MCDA1_GPIO].ulPinType, g_APinDescription[PIN_HSMCI_MCDA1_GPIO].ulPin, g_APinDescription[PIN_HSMCI_MCDA1_GPIO].ulPinConfiguration);
+	PIO_Configure(g_APinDescription[PIN_HSMCI_MCDA2_GPIO].pPort, g_APinDescription[PIN_HSMCI_MCDA2_GPIO].ulPinType, g_APinDescription[PIN_HSMCI_MCDA2_GPIO].ulPin, g_APinDescription[PIN_HSMCI_MCDA2_GPIO].ulPinConfiguration);
+	PIO_Configure(g_APinDescription[PIN_HSMCI_MCDA3_GPIO].pPort, g_APinDescription[PIN_HSMCI_MCDA3_GPIO].ulPinType, g_APinDescription[PIN_HSMCI_MCDA3_GPIO].ulPin, g_APinDescription2[PIN_HSMCI_MCDA3_GPIO].ulPinConfiguration);
+	#else
+	PIO_Configure(g_APinDescription2[PIN_HSMCI_MCCDA_GPIO].pPort, g_APinDescription2[PIN_HSMCI_MCCDA_GPIO].ulPinType, g_APinDescription2[PIN_HSMCI_MCCDA_GPIO].ulPin, g_APinDescription2[PIN_HSMCI_MCCDA_GPIO].ulPinConfiguration);
+	PIO_Configure(g_APinDescription2[PIN_HSMCI_MCCK_GPIO].pPort, g_APinDescription2[PIN_HSMCI_MCCK_GPIO].ulPinType, g_APinDescription2[PIN_HSMCI_MCCK_GPIO].ulPin, g_APinDescription2[PIN_HSMCI_MCCK_GPIO].ulPinConfiguration);
+	PIO_Configure(g_APinDescription2[PIN_HSMCI_MCDA0_GPIO].pPort, g_APinDescription2[PIN_HSMCI_MCDA0_GPIO].ulPinType, g_APinDescription2[PIN_HSMCI_MCDA0_GPIO].ulPin, g_APinDescription2[PIN_HSMCI_MCDA0_GPIO].ulPinConfiguration);
+	PIO_Configure(g_APinDescription2[PIN_HSMCI_MCDA1_GPIO].pPort, g_APinDescription2[PIN_HSMCI_MCDA1_GPIO].ulPinType, g_APinDescription2[PIN_HSMCI_MCDA1_GPIO].ulPin, g_APinDescription2[PIN_HSMCI_MCDA1_GPIO].ulPinConfiguration);
+	PIO_Configure(g_APinDescription2[PIN_HSMCI_MCDA2_GPIO].pPort, g_APinDescription2[PIN_HSMCI_MCDA2_GPIO].ulPinType, g_APinDescription2[PIN_HSMCI_MCDA2_GPIO].ulPin, g_APinDescription2[PIN_HSMCI_MCDA2_GPIO].ulPinConfiguration);
+	PIO_Configure(g_APinDescription2[PIN_HSMCI_MCDA3_GPIO].pPort, g_APinDescription2[PIN_HSMCI_MCDA3_GPIO].ulPinType, g_APinDescription2[PIN_HSMCI_MCDA3_GPIO].ulPin, g_APinDescription2[PIN_HSMCI_MCDA3_GPIO].ulPinConfiguration);
+	#endif
   //set pullups (not on clock!)
   digitalWrite(PIN_HSMCI_MCCDA_GPIO_ARDUINO, HIGH);
   digitalWrite(PIN_HSMCI_MCDA0_GPIO_ARDUINO, HIGH);
@@ -395,7 +405,7 @@ void MassStorage::Init()
 
 const char* MassStorage::CombineName(const char* directory, const char* fileName)
 {
-	int out = 0;
+	unsigned int out = 0;
 	int in = 0;
 
 	if (directory != NULL)
