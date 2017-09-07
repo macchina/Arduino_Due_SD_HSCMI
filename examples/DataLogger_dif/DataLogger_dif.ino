@@ -17,13 +17,11 @@
 // Including Arduino_Due_SD_HSCMI library also creates SD object (MassStorage class)
 #include <Arduino_Due_SD_HSMCI.h> // This creates the object SD
 
-// Include SamNonDuePin.h library
 #include "Arduino.h"
-#include "SamNonDuePin.h"
 
-// Copied from example for SamNonDuePin.h for your board
-const int SW = PIN_EMAC_ERX1;     // Pushbutton SW2
-const int Red =  32;         // the number of the LED pin
+// Macchina M2 specific defines for your board
+const int SW = Button2;     // Pushbutton SW2
+const int Red =  DS2;       // the number of the RED LED pin
 
 // We need to create FileStore object, we will be using it to open/create file and to close file.
 FileStore FS;
@@ -54,14 +52,14 @@ void setup() {
    
   // Configure pushbuttons and LEDs
   pinMode(Red, OUTPUT);
-  pinModeNonDue(SW,INPUT);
+  pinMode(SW,INPUT);
   digitalWrite(Red, LOW);
   }
 
 void loop() {
   // This code is for logging data when button in pushed
   // Check if pushbutton is pushed
-  sw_state = digitalReadNonDue(SW);
+  sw_state = digitalRead(SW);
   if (sw_state == HIGH) {
     digitalWrite(Red, HIGH);     // turn LED OFF:
   }
@@ -74,7 +72,7 @@ void loop() {
     String str = "i= " + String(i) + "\n"; // creates a string
     char write_buffer[sizeof(str)]; // Creating array of char in length of our string
     str.toCharArray(write_buffer,sizeof(str)); // transform string to array of chars of strings's size
-   // SerialUSB.print(write_buffer); // We can check what was created, SerilESB.print(.) uses serial buffer so we can print string or array of chars 
+   // SerialUSB.print(write_buffer); // We can check what was created, SerialUSB.print(.) uses serial buffer so we can print string or array of chars 
     // Write data to file.
     FS.Open("0:","data",true); // openning file
     FS.GoToEnd(); // Search for the end of file and write to it
