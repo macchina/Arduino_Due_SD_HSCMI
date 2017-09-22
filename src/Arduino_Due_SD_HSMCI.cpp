@@ -273,7 +273,7 @@ MassStorage::MassStorage() : combinedName(combinedNameBuff, ARRAY_SIZE(combinedN
 	findDir = new DIR();
 }
 
-void MassStorage::Init()
+bool MassStorage::Init()
 {
 	// Initialize SD MMC stack
 
@@ -350,7 +350,7 @@ void MassStorage::Init()
 					Debug("MS",")\n");
 					break;
 			}
-			return;
+			return false;
 		}
 	} while (err != SD_MMC_OK);
 
@@ -382,14 +382,14 @@ void MassStorage::Init()
 			break;
 		case CARD_TYPE_SDIO:
 			Debug("SDIO\n");
-			return;
+			return false;
 		case CARD_TYPE_SD_COMBO:
 			Debug("SD COMBO\n");
 			break;
 		case CARD_TYPE_UNKNOWN:
 		default:
 			Debug("Unknown\n");
-			return;
+			return false;
 	}
 
 	// Mount the file system
@@ -399,7 +399,9 @@ void MassStorage::Init()
 	{
 		Debug("MS","Can't mount filesystem 0: code ");
 		Debug(mounted);
+        return false;
 	}
+    return true;
 }
 
 
