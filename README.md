@@ -5,7 +5,6 @@ Libraries and Examples for Macchina M2 HSMCI (High Speed MultiMedia Card Interfa
 
 1. Download the files
 2. Move the folder `Arduino_Due_SD_HSMCI` to your Arduino Libraries
-3. The folder `SD_HSMCI` (Resides as a child directory under `Arduino_Due_SD_HSMCI` directory)
 
 #### Storage manipulation
 
