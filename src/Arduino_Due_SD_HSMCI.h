@@ -140,7 +140,7 @@ public:
 
 //protected:
   MassStorage(void);//MassStorage(Platform* p);
-  void Init();
+  bool Init();
 
 private:
 
