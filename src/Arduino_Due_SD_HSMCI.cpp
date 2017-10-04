@@ -33,10 +33,10 @@ void Debug(const char* msg){
 /*
  * Pins descriptions
  */
-#ifndef MACCHINA_M2
 extern const PinDescription g_APinDescription2[]=
 {
-  // 0 .. 53 - Digital pins
+#ifndef __MACCHINA_M2
+    // 0 .. 53 - Digital pins
   // ----------------------
   // 0/1 - UART (Serial)
   { PIOA, PIO_PA8A_URXD,     ID_PIOA, PIO_PERIPH_A, PIO_DEFAULT,  PIN_ATTR_DIGITAL,                 NO_ADC, NO_ADC, NOT_ON_PWM,  NOT_ON_TIMER }, // URXD
@@ -242,8 +242,9 @@ extern const PinDescription g_APinDescription2[]=
 
   // END
   { NULL, 0, 0, PIO_NOT_A_PIN, PIO_DEFAULT, 0, NO_ADC, NO_ADC, NOT_ON_PWM, NOT_ON_TIMER }
-} ;
 #endif
+} ;
+
 
 
 bool StringEquals(const char* s1, const char* s2)
