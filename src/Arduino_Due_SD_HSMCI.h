@@ -22,7 +22,9 @@ Modified Tony Doust 26/08/2017 for use with Macchina M2 Tony Doust
 #define __MACCHINA_M2	// Use Macchine M2 specific variant file defines
 #endif
 
+#ifndef SD_DEBUG
 #define SD_DEBUG true
+#endif
 
 // Language-specific includes
 #include <cctype>
