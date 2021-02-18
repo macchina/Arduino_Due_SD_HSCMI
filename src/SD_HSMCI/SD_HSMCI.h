@@ -81,7 +81,7 @@
 	PIOA, ID_PIOA, PIO_PERIPH_A, PIO_PULLUP }
 #ifdef __MACCHINA_M2
 #define PIN_HSMCI_CD {PIO_PC30, PIOC, ID_PIOC, PIO_INPUT, PIO_PULLUP}
-#define SD_MMC_0_CD_GPIO            64//(PIO_PB27_IDX) //Macchina M2 digital pin 64
+#define SD_MMC_0_CD_GPIO            36//(PIO_PB27_IDX) //Macchina M2 digital pin 36
 #define SD_MMC_0_CD_GPIO_INSTRUMENT DS2//(PIO_PB27_IDX) //Macchina M2 digital pin Red_Led
 #define SD_MMC_0_CD_PIO_ID          ID_PIOA
 #define SD_MMC_0_CD_FLAGS           (PIO_INPUT | PIO_PULLUP)
